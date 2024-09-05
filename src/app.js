@@ -14,3 +14,6 @@ app.listen(PORT, () => {
 
 //agregar esto a un redmi 
 //https://www.youtube.com/watch?v=qFmwRriNJWs
+//
+//https://www.youtube.com/watch?v=nYAfe7er0zI
+//https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-update-queries

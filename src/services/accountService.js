@@ -1,19 +1,47 @@
-const getAllAccounts = (req, res) => {
-    //const allAccounts = accountService.getAllAccounts();
-    //console.log("hola a todos get");
-    return 1;
+const modelAccounts = require("./../database/models").accounts;
 
+const getAllAccounts = () => {
+    return modelAccounts.findAll({raw: true});
 };
 
 const getAccountById = (accountId) => {
-    //const allAccounts = accountService.getAllAccounts();
-    //console.log("hola a todos get");
-    //res.send(`Get todas las accounts`);
-    return `{account: ${accountId}, callNumber: 4 }`;
+    return modelAccounts.findByPk(accountId);
 
 };
 
+const insertAccount = (account) => {
+    return modelAccounts.create(account);
+};
+
+const updateAccount = (account, accountId) => {
+    return modelAccounts.update(
+        account,
+        {
+          where: {
+            id: accountId,
+          },
+        },
+      );
+};
+
+const deleteAccount = (accountId) => {
+    //logical delete 
+    return modelAccounts.update(
+        {
+            'status': 'DL'
+        },
+        {
+          where: {
+            id: accountId,
+          },
+        },
+      );
+}
+
 module.exports = {
     getAllAccounts,
-    getAccountById
+    getAccountById,
+    insertAccount,
+    updateAccount,
+    deleteAccount
 };

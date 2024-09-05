@@ -1,18 +1,60 @@
 const accountService = require("../services/accountService");
 
 const getAllAccounts = (req, res) => {
-    //const allAccounts = accountService.getAllAccounts();
-    //console.log("hola a todos get");
-    res.send(`Get todas las accounts`);
+    accountService.getAllAccounts()
+    .then((data) => {
+        res.status(200).json({ data: data });       
+    })
+    .catch((error) => {
+        res.status(200).json({ data: error });        
+    })
+    
 };
 
 const getAccountById = (req, res) => {
-    const account = accountService.getAccountById(req.params.accountId);
-    //console.log("hola a todos getALL");
-    res.send(`get por id ${account}`);
-}
+    accountService.getAccountById(req.params.accountId)
+    .then((data) => {
+        res.status(200).json({ data: data });  
+    })
+    .catch((error) => {
+        res.status(200).json({ data: error });
+    });
+};
+
+const insertAccount = (req, res) => {
+    accountService.insertAccount(req.body)
+    .then((data) => {
+        res.status(201).json({ data: data });  
+    })
+    .catch((error) => {
+        res.status(200).json({ data: error });
+    });
+};
+
+const updateAccount = (req, res) => {
+    accountService.updateAccount(req.body, req.params.accountId)
+    .then((data) => {
+        res.status(201).json({ data: data });  
+    })
+    .catch((error) => {
+        res.status(200).json({ data: error });
+    })
+};
+
+const deleteAccount = (req, res) => {
+    accountService.deleteAccount(req.params.accountId)
+    .then((data) => {
+        res.status(200).json({data: data});
+    })
+    .catch((error) => {
+        res.status(200).json({ data: error });
+    })
+};
 
 module.exports = {
     getAllAccounts,
-    getAccountById
+    getAccountById,
+    insertAccount,
+    updateAccount,
+    deleteAccount
 };
